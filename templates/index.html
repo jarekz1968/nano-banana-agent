@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>NanoBanana Agent</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>NanoBananaDesigner + TrendScanner</h1>
+
+  <form action="/generate" method="post">
+    <button type="submit">Generuj zestaw</button>
+  </form>
+
+  <h2>Do zatwierdzenia</h2>
+  <ul>
+    {% for b in pending %}
+      <li>{{ b }}
+        <form action="/approve" method="post" style="display:inline">
+          <input type="hidden" name="bundle" value="{{ b }}">
+          <button type="submit">Zatwierdź</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Zatwierdzone</h2>
+  <ul>
+    {% for b in approved %}
+      <li>{{ b }}
+        <form action="/publish" method="post" style="display:inline">
+          <input type="hidden" name="bundle" value="{{ b }}">
+          <button type="submit">Publikuj</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Opublikowane</h2>
+  <ul>
+    {% for b in published %}
+      <li>{{ b }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
